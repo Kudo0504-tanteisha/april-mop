@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> WELCOME TO OUR SHOW! </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24, #f0932b);
+            background-size: 400% 400%;
+            animation: rainbow 3s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+         
+
+        .floating-emoji {
+            position: fixed;
+            font-size: 3em;
+            pointer-events: none;
+            z-index: 100;
+            animation: float 6s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+		.moving-text {
+            position: fixed;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+            pointer-events: none;
+            z-index: 200;
+            animation: moveRandom 8s linear infinite;
+        }
+
+        @keyframes moveRandom {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30vw, -20vh) rotate(90deg); }
+            50% { transform: translate(60vw, 30vh) rotate(180deg); }
+            75% { transform: translate(-20vw, 40vh) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+		body::after {
+            content: '🤡';
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 2em;
+            left: 0;
+            top: 0;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease;
+            mix-blend-mode: difference;
+        }
+
+        .container {
+            background: rgba(255,255,255,0.95);
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            animation: bounceIn 1s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            padding: 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '🤡';
+            position: absolute;
+            font-size: 4em;
+            top: -20px;
+            right: -20px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .progress {
+            background: #333;
+            height: 10px;
+            border-radius: 5px;
+            margin: 20px 30px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #ffeb3b, #ff9800, #f44336);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            position: relative;
+        }
+
+        .progress-bar::after {
+            content: '🚀';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: move 1s linear infinite;
+        }
+
+        @keyframes move {
+            0% { transform: translateY(-50%) translateX(0); }
+            100% { transform: translateY(-50%) translateX(-30px); }
+        }
+
+        .question-container {
+            padding: 40px 30px;
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .question {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 30px;
+            line-height: 1.4;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+			animation: wiggle 0.5s ease-in-out infinite;
+        }
+		
+		  @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(2deg); }
+            75% { transform: rotate(-2deg); }
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .option:hover::before {
+            left: 100%;
+        }
+
+        .option:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .option.selected {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            animation: pulse 0.6s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .surprise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #ff4757;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            z-index: 1000;
+            transform: scale(0);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .surprise.show {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .surprise h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: shake 0.5s infinite;
+        }
+		
+		.popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #ff4757;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            z-index: 1000;
+            transform: scale(0);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .popup.show {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .popup h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: shake 0.5s infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .result {
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .fool-icon {
+            font-size: 6em;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite;
+        }
+
+        .fool-title {
+            font-size: 2.5em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #ff4757;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+
+        .fool-desc {
+            font-size: 1.3em;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 480px) {
+            .header h1 { font-size: 1.8em; }
+            .question { font-size: 1.3em; }
+            .surprise h1 { font-size: 2.5em; }
+            .surprise { font-size: 2em; }
+        }
+		
+		.spinning-image {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100px;
+            height: 100px;
+			z-index: 999;
+            background-image: url('https://images.genius.com/d5bc99fc14b779b3753e3f7e0628e899.980x980x1.png'); /* Gambar yang bergerak */
+            background-size: cover;
+            animation: spin-move 4s ease-in-out infinite; /* Durasi 4 detik, ulang */
+        }
+        @keyframes spin-move {
+            0% {
+                transform: translateX(0) rotate(0deg); /* Mulai dari kiri, tidak putar */
+            }
+            25% {
+                transform: translateX(calc(100vw - 50px)) rotate(90deg); /* Ke kanan, putar 90deg */
+            }
+            50% {
+                transform: translateX(calc(100vw - 50px)) rotate(180deg); /* Tetap kanan, putar 180deg */
+            }
+            75% {
+                transform: translateX(0) rotate(270deg); /* Kembali ke kiri, putar 270deg */
+            }
+            100% {
+                transform: translateX(0) rotate(360deg); /* Kembali kiri, putar penuh */
+            }
+        }
+		
+		.flying-flowers {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+			z-index: 999;
+            pointer-events: none; /* Agar tidak mengganggu klik */
+            overflow: hidden;
+        }
+        .flower-particle {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background-image: url('https://images.genius.com/d5bc99fc14b779b3753e3f7e0628e899.980x980x1.png'); /* Gambar bunga */
+            background-size: cover;
+            animation: fly 3s linear infinite; /* Durasi 3 detik, ulang */
+        }
+        @keyframes fly {
+            0% {
+                transform: translateY(-100px) rotate(0deg); /* Mulai dari atas */
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg); /* Jatuh ke bawah, putar */
+                opacity: 0;
+            }
+        }
+        /* Variasi untuk beberapa bunga */
+        .flower-particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .flower-particle:nth-child(2) { left: 30%; animation-delay: 0.5s; }
+        .flower-particle:nth-child(3) { left: 50%; animation-delay: 1s; }
+        .flower-particle:nth-child(4) { left: 70%; animation-delay: 1.5s; }
+        .flower-particle:nth-child(5) { left: 90%; animation-delay: 2s; }
+		
+		.video-chaos {
+			position: fixed;
+			left: 100%;
+			width: 300px;
+			height: 170px;
+			z-index: 99999;
+			pointer-events: none;
+			animation: jalanChaos linear forwards;
+		}
+
+	@keyframes jalanChaos {
+	  from {
+		left: 100%;
+	  }
+	  to {
+		left: -320px;
+	  }
+	}
+
+	.fake-loading {
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  background: #111;
+	  color: white;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	  align-items: center;
+	  font-size: 2em;
+	  z-index: 2000;
+	  opacity: 0;
+	  pointer-events: none;
+	  transition: 0.3s;
+	}
+
+	.fake-loading.show {
+	  opacity: 1;
+	  pointer-events: all;
+	}
+
+	.loading-bar {
+	  width: 80%;
+	  height: 20px;
+	  background: #333;
+	  margin-top: 20px;
+	  border-radius: 10px;
+	  overflow: hidden;
+	}
+
+	.loading-fill {
+	  height: 100%;
+	  width: 0%;
+	  background: lime;
+	  transition: width 0.3s;
+	}
+
+	.face-scan {
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  background: black;
+	  color: lime;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	  align-items: center;
+	  z-index: 3000;
+	  opacity: 0;
+	  pointer-events: none;
+	  transition: 0.3s;
+	}
+
+	.face-scan.show {
+	  opacity: 1;
+	  pointer-events: all;
+	}
+
+	#camera {
+	  width: 250px;
+	  border: 3px solid lime;
+	  border-radius: 10px;
+	}
+
+	.scan-line {
+	  width: 250px;
+	  height: 4px;
+	  background: red;
+	  position: absolute;
+	  animation: scan 2s infinite;
+	}
+
+	@keyframes scan {
+	  0% { transform: translateY(-100px); }
+	  100% { transform: translateY(100px); }
+	}
+
+	.flash {
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  background: white;
+	  opacity: 0;
+	  pointer-events: none;
+	  z-index: 4000;
+	}
+
+	.flash.show {
+	  animation: flashEffect 0.3s ease;
+	}
+
+	@keyframes flashEffect {
+	  0% { opacity: 0; }
+	  50% { opacity: 1; }
+	  100% { opacity: 0; }
+	}
+
+	.video-overlay {
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  background: black;
+	  z-index: 999999; /* PALING ATAS */
+	  display: none;
+	}
+
+	.video-overlay iframe {
+	  width: 100%;
+	  height: 100%;
+	}
+	
+	.fake-progress {
+	  position: absolute;
+	  bottom: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 6px;
+	  z-index: 9999999;
+	  background: rgba(255,255,255,0.2);
+	  opacity: 0; /* 🔥 sembunyikan dulu */
+	  transition: opacity 0.3s;
+	}
+
+	.fake-bar {
+	  width: 0%;
+	  height: 100%;
+	  background: red;
+	  transition: width linear;
+	}
+
+	.blocker {
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  z-index: 10;
+	  background: transparent;
+	}
+
+    </style>
+</head>
+<body>
+
+<audio id="musik" loop>
+  <source src="TDX-OST.mp3" type="audio/mpeg">
+</audio>
+
+<div id="videoContainer"></div>
+
+    <!-- SURPRISE POPUP -->
+    <div class="surprise" id="surprise">
+        <h1>LOL BOZO! 🤡😂</h1>
+        <p> WERE CAPTURE YOUR PIC FOR THE TOP 10 STUPIDEST PPL </p>
+        <button onclick="closeSurprise()" style="
+            background: #00d2d3; 
+            color: white; 
+            border: none; 
+            padding: 15px 30px; 
+            border-radius: 25px; 
+            font-size: 1.1em; 
+            cursor: pointer;
+            margin-top: 15px;
+        "> Meh,next</button>
+    </div>
+	
+	<div class="popup" id="popup">
+		<h1>ENOUGH</h1>
+		<p>YOU HAVE BROUGHT DEATH AND SUFFERING TO OUR LAND, SUCH A MADNESS CANNOT BE FORGIVEN</p>
+		<button onclick="closePopup()" style="
+            background: #00d2d3; 
+            color: white; 
+            border: none; 
+            padding: 15px 30px; 
+            border-radius: 25px; 
+            font-size: 1.1em; 
+            cursor: pointer;
+            margin-top: 15px;
+        "> Meh,next</button>
+  </div>
+  
+  <div id="videoOverlay" class="video-overlay">
+		<iframe 
+		id="fullscreenVideo"
+		src=""
+		frameborder="0"
+		allow="autoplay"
+		></iframe>
+	
+		<div class="blocker"></div>
+	
+		<div class="fake-progress">
+			<div class="fake-bar" id="fakeBar"></div>
+		</div>
+		
+	</div>
+
+<div class="fake-loading" id="fakeLoading">
+  <h1>Loading...</h1>
+  <p id="loadingText">Menghitung kebodohan anda...</p>
+  <div class="loading-bar">
+    <div class="loading-fill" id="loadingFill"></div>
+  </div>
+</div>
+
+<div class="face-scan" id="faceScan">
+  <h1>SCANNING FACE...</h1>
+  <video id="camera" autoplay playsinline></video>
+  <div class="scan-line"></div>
+  <p id="scanText">Mengakses kamera...</p>
+</div>
+
+<div class="flash" id="flash"></div>
+	
+	<div class="spinning-image" id="spinning-image"></div>
+	
+	<div class="flying-flowers" id="flying-flowers">
+            <div class="flower-particle"></div>
+            <div class="flower-particle"></div>
+            <div class="flower-particle"></div>
+            <div class="flower-particle"></div>
+            <div class="flower-particle"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🤡 YOU ARE AN IDIOT 🤡</h1>
+            <p>Tes HOW FOOL YOU ARE</p>
+            <div class="progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+
+        <div id="quizContainer">
+            <div class="question-container">
+                <div class="question" id="questionText">Loading kejutan...</div>
+                <div class="options" id="options"></div>
+            </div>
+        </div>
+
+        <div id="resultContainer" class="result hidden">
+            <div class="fool-icon" id="foolIcon">🤡</div>
+            <div class="fool-title" id="foolTitle">APRIL FOOL</div>
+            <div class="fool-desc" id="foolDesc">GOOD MY LITTLE IDIOT FOOLISH DOG 😂</div>
+            <button class="restart-btn" onclick="startQuiz()"> HAHAHA AGAIN 🎭</button>
+        </div>
+    </div>
+
+    <script>
+		const spinningImage = document.getElementById('spinning-image');
+		const flyingFlowers = document.getElementById('flying-flowers');
+        const quizData = [
+            {
+                question: "Kamu percaya gak aku itu THE NARRATOR KUDO ATTORNEY TANTEISHA?",
+                options: ["Iya dong!", "Kadang-kadang", "Enggak lah", "Tergantung"]
+            },
+            {
+                question: "Kalau cewek yg kau sukai jg suka balik, apa perasaan mu?",
+                options: ["Langsung seneng!", "SENENG", "YATTAA", "HAPPY ENDING"]
+            },
+            {
+                question: "Berikan ulasan mu tentang STEEL BALL RUN?",
+                options: ["JELEK", "BAD", "NO PEAK", "BAGUSAN FIEREN ama JJK"]
+            },
+            {
+                question: "Hari, wisnu, kalis, agung, dll, apa anggapan mu?",
+                options: ["suka...", "Tanya nama bapak", "Nolak fakta", "Lari!"]
+            },
+            {
+                question: "apa perasaan mu pada HARI 1 april?",
+                options: ["Hari bahagia", "Hari paling eek", "Hari biasa", "Your Lie in April"]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = [];
+
+        function showSurprise() {
+            document.getElementById('surprise').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSurprise() {
+            document.getElementById('surprise').classList.remove('show');
+            document.body.style.overflow = 'auto';
+			
+			    currentQuestion++;
+				showQuestion();
+        }
+		
+		function showPopup() {
+			document.getElementById("popup").classList.add('show');
+            document.body.style.overflow = 'hidden';
+		}
+
+		function closePopup() {
+			document.getElementById("popup").classList.remove('show');
+            document.body.style.overflow = 'auto';
+		}
+		
+	function fadeOut(audio) {
+		let vol = audio.volume;
+		let fade = setInterval(() => {
+			if (vol > 0.05) {
+				vol -= 0.05;
+				audio.volume = vol;
+			} else {
+				clearInterval(fade);
+				audio.pause();
+				audio.volume = 1; // reset
+			}
+		}, 50);
+	}
+		
+	function playFullscreenVideo(videoId, duration) {
+		const overlay = document.getElementById("videoOverlay");
+		const iframe = document.getElementById("fullscreenVideo");
+		const bar = document.getElementById("fakeBar");
+		const progress = document.querySelector(".fake-progress");
+		const musik = document.getElementById("musik");
+
+		// ⛔ pause musik
+		fadeOut(musik)
+		if (musik) musik.pause();
+
+		// reset state
+		progress.style.opacity = "0";
+		bar.style.transition = "none";
+		bar.style.width = "0%";
+
+		iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&disablekb=1`;
+
+		overlay.style.display = "block";
+		document.body.style.overflow = "hidden";
+
+		// ⏳ tunggu dikit biar video kebuka dulu
+		setTimeout(() => {
+			progress.style.opacity = "1"; // ✅ baru muncul
+
+			bar.style.transition = `width ${duration}ms linear`;
+			bar.style.width = "100%";
+		}, 300);
+
+		// selesai
+		setTimeout(() => {
+			overlay.style.display = "none";
+			iframe.src = "";
+			document.body.style.overflow = "auto";
+
+			// reset lagi biar tidak nyisa
+			bar.style.transition = "none";
+			bar.style.width = "0%";
+			progress.style.opacity = "0";
+
+			// ▶️ lanjut musik
+			if (musik) musik.play();
+
+		}, duration);
+	}
+		
+			function triggerFlash() {
+		const flash = document.getElementById("flash");
+		flash.classList.add("show");
+
+		setTimeout(() => {
+			flash.classList.remove("show");
+		}, 300);
+	}
+		
+		function startFaceScan() {
+    const scan = document.getElementById("faceScan");
+    const video = document.getElementById("camera");
+    const text = document.getElementById("scanText");
+
+    scan.classList.add("show");
+
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+            video.srcObject = stream;
+
+            const messages = [
+                "Mendeteksi wajah...",
+                "Atleast ngaca kidz...",
+                "Mengirim ke admin...",
+                "Mengirim ke kamboja...",
+                "MONKEY DETECTION 🤡"
+            ];
+
+            let i = 0;
+            const interval = setInterval(() => {
+                text.textContent = messages[i % messages.length];
+                i++;
+            }, 1000);
+
+            setTimeout(() => {
+                clearInterval(interval);
+				
+				triggerFlash(); // ⚡ FLASH DI SINI
+
+				setTimeout(() => {
+					stream.getTracks().forEach(track => track.stop());
+					scan.classList.remove("show");
+					showSurprise();
+				}, 400);
+
+			}, 5000);
+        })
+        .catch(err => {
+            // Kalau user nolak kamera
+            text.textContent = "I'm ALWAYS COME BACK😈";
+
+            setTimeout(() => {
+                scan.classList.remove("show");
+                showSurprise();
+            }, 3000);
+        });
+}
+
+        function startQuiz() {
+            currentQuestion = 0;
+            answers = [];
+            document.getElementById('quizContainer').classList.remove('hidden');
+            document.getElementById('resultContainer').classList.add('hidden');
+            document.getElementById('surprise').classList.remove('show');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            // Kejutan di pertanyaan ke-3!
+            if (currentQuestion === 2) {
+                setTimeout(startFaceScan, 1000);
+                return;
+            }
+
+            const questionData = quizData[currentQuestion];
+            document.getElementById('questionText').textContent = questionData.question;
+            
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            
+            questionData.options.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.textContent = option;
+                optionEl.onclick = () => selectOption(index);
+                optionsContainer.appendChild(optionEl);
+            });
+
+            updateProgress();
+        }
+
+        function selectOption(selectedIndex) {
+            const options = document.querySelectorAll('.option');
+            options.forEach((opt, index) => {
+                opt.classList.toggle('selected', index === selectedIndex);
+            });
+
+            answers[currentQuestion] = selectedIndex;
+			
+			if (currentQuestion === 0 && selectedIndex === 2) {
+        playFullscreenVideo("C6L35peFnJ8", 23000); // 10 detik
+        return; // berhenti di sini biar gak lanjut soal berikutnya
+		}
+		
+		if (Math.random() < 0.4) {
+        startFakeLoading();
+        return;
+		}
+            
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < quizData.length) {
+                    showQuestion();
+                } else {
+                    showResult();
+                }
+            }, 800);
+        }
+		
+		function startFakeLoading() {
+    const loading = document.getElementById("fakeLoading");
+    const fill = document.getElementById("loadingFill");
+    const text = document.getElementById("loadingText");
+
+    loading.classList.add("show");
+
+    let progress = 0;
+
+    const messages = [
+        "Count how many your braincell...",
+        "Scanning otak...",
+        "APEX PREDATORRRR...",
+        "Download Virus...",
+        "HAMPIR SELESAI..."
+    ];
+
+    let interval = setInterval(() => {
+        progress += Math.random() * 15;
+        if (progress > 100) progress = 100;
+
+        fill.style.width = progress + "%";
+
+        text.textContent = messages[Math.floor(Math.random() * messages.length)];
+
+        if (progress >= 100) {
+            clearInterval(interval);
+
+            setTimeout(() => {
+                loading.classList.remove("show");
+                showSurprise(); // 💥 JUMPSCARE
+            }, 800);
+        }
+    }, 300);
+}
+
+        function updateProgress() {
+            const progress = ((currentQuestion) / quizData.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function showResult() {
+            document.getElementById('quizContainer').classList.add('hidden');
+            document.getElementById('resultContainer').classList.remove('hidden');
+            
+            // Random efek lucu
+            const icons = ['🤡', '😂', '🎉', '😈', '🎭'];
+            const titles = ['APRIL FOOL!', 'FOOLISH!', 'GOTCHA!', 'HAHAHA!', '1 APRIL!'];
+            const descs = [
+                'CONGRATS YOU PASSED TO BE CLOWN! 🤡',
+                'Thank you my little rubber baby buggy bumpers to be so fool! 😂',
+                'HAPPY BIRTHDAY MY LITTLE CLOWN! 🎉',
+                'YOU FOOL, NOW YOU WILL BE MY MINION! 😈',
+                'HAHAHAHAHA Cicak cicak cicak! 🎭'
+            ];
+
+            const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+            const randomTitle = titles[Math.floor(Math.random() * titles.length)];
+            const randomDesc = descs[Math.floor(Math.random() * descs.length)];
+
+            document.getElementById('foolIcon').textContent = randomIcon;
+            document.getElementById('foolTitle').textContent = randomTitle;
+            document.getElementById('foolDesc').textContent = randomDesc;
+        }
+
+        // Mulai dengan delay biar lebih dramatis
+        setTimeout(() => {
+            startQuiz();
+        }, 500);
+		
+	function spawnVideo() {
+		const container = document.getElementById("videoContainer");
+
+		const iframe = document.createElement("iframe");
+		const videos = [
+		"dQw4w9WgXcQ",
+		"F6TTEaWT4m4",
+		"x35z7QVbID0"
+		];
+
+		let vid = videos[Math.floor(Math.random() * videos.length)];
+		iframe.src = `https://www.youtube.com/embed/${vid}?autoplay=1&mute=1`;
+		iframe.className = "video-chaos";
+
+		// 🎲 posisi random (atas-bawah)
+		iframe.style.top = Math.random() * 80 + "%";
+
+		// 🎲 speed random
+		iframe.style.animationDuration = (5 + Math.random() * 5) + "s";
+
+		container.appendChild(iframe);
+
+		// 🧹 hapus setelah keluar layar
+		setTimeout(() => {
+        iframe.remove();
+		}, 10000);
+	}
+	
+	setInterval(() => {
+    spawnVideo();
+	}, 3000);
+       
+document.addEventListener("click", function() {
+  const audio = document.getElementById("musik");
+  audio.play();
+}, { once: true });
+
+	// blok back button (semi)
+history.pushState(null, null, location.href);
+window.onpopstate = function () {
+    history.go(1);
+};
+
+		
+    </script>
+</body>
+</html>
