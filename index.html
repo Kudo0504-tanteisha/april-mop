@@ -576,6 +576,7 @@
 	  height: 6px;
 	  z-index: 9999999;
 	  background: rgba(255,255,255,0.2);
+	  cursor: pointer;
 	  opacity: 0; /* 🔥 sembunyikan dulu */
 	  transition: opacity 0.3s;
 	}
@@ -648,7 +649,7 @@
 	
 		<div class="blocker"></div>
 	
-		<div class="fake-progress">
+		<div class="fake-progress" id="fakeProgress">
 			<div class="fake-bar" id="fakeBar"></div>
 		</div>
 		
@@ -770,6 +771,26 @@
 			}
 		}, 50);
 	}
+	
+	const progress = document.getElementById("fakeProgress");
+	const bar = document.getElementById("fakeBar");
+	
+	progress.addEventListener("click", function(e) {
+		const rect = progress.getBoundingClientRect();
+		const percent = (e.clientX - rect.left) / rect.width * 100;
+
+		bar.style.transition = "none";
+		bar.style.width = percent + "%";
+
+		setTimeout(() => {
+			bar.style.transition = "width 1s linear";
+			bar.style.width = "70%";
+		}, 200);
+
+		if (Math.random() < 0.3) {
+			alert("NO, I WONT LET YOU ESCAPE 🤡");
+		}
+	});
 		
 	function playFullscreenVideo(videoId, duration) {
 		const overlay = document.getElementById("videoOverlay");
@@ -917,7 +938,7 @@
             answers[currentQuestion] = selectedIndex;
 			
 			if (currentQuestion === 0 && selectedIndex === 2) {
-        playFullscreenVideo("x1yhWUGtsok", 23000); // 10 detik
+        playFullscreenVideo("x1yhWUGtsok", 35000); // 10 detik
         return; // berhenti di sini biar gak lanjut soal berikutnya
 		}
 		
