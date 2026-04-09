@@ -12,7 +12,7 @@
         }
 
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-family: 'Comic Sans MS', Arial, sans-serif;
             background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24, #f0932b);
             background-size: 400% 400%;
             animation: rainbow 3s ease infinite;
@@ -365,35 +365,6 @@
             .surprise { font-size: 2em; }
         }
 		
-		.spinning-image {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100px;
-            height: 100px;
-			z-index: 999;
-            background-image: url('https://images.genius.com/d5bc99fc14b779b3753e3f7e0628e899.980x980x1.png'); /* Gambar yang bergerak */
-            background-size: cover;
-            animation: spin-move 4s ease-in-out infinite; /* Durasi 4 detik, ulang */
-        }
-        @keyframes spin-move {
-            0% {
-                transform: translateX(0) rotate(0deg); /* Mulai dari kiri, tidak putar */
-            }
-            25% {
-                transform: translateX(calc(100vw - 50px)) rotate(90deg); /* Ke kanan, putar 90deg */
-            }
-            50% {
-                transform: translateX(calc(100vw - 50px)) rotate(180deg); /* Tetap kanan, putar 180deg */
-            }
-            75% {
-                transform: translateX(0) rotate(270deg); /* Kembali ke kiri, putar 270deg */
-            }
-            100% {
-                transform: translateX(0) rotate(360deg); /* Kembali kiri, putar penuh */
-            }
-        }
-		
 		.flying-flowers {
             position: absolute;
             top: 0;
@@ -434,7 +405,7 @@
 			left: 100%;
 			width: 300px;
 			height: 170px;
-			z-index: 99999;
+			z-index: 999;
 			pointer-events: none;
 			animation: jalanChaos linear forwards;
 		}
@@ -672,8 +643,6 @@
 
 <div class="flash" id="flash"></div>
 	
-	<div class="spinning-image" id="spinning-image"></div>
-	
 	<div class="flying-flowers" id="flying-flowers">
             <div class="flower-particle"></div>
             <div class="flower-particle"></div>
@@ -784,7 +753,7 @@
 
 		setTimeout(() => {
 			bar.style.transition = "width 1s linear";
-			bar.style.width = "70%";
+			bar.style.width = "20%";
 		}, 200);
 
 		if (Math.random() < 0.3) {
